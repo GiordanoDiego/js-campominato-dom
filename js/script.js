@@ -1,30 +1,22 @@
-/*
-console.log('nomeVariabile', nomeVariabile, typeof nomeVariabile);
+/*-------------FUNCTION-------------*/
 
-document.getElementById('idHtml').innerHTML = noveVariabileJS;
+function playGameDifficulty (x){
+    boxContainer.innerHTML= "";
+    for(let i=1; i<=x; i++ ){
+        const newDiv = document.createElement('div');
+        newDiv.classList.add("box", "box-" + x);
+        newDiv.append(i);
+        boxContainer.append(newDiv);
+    
+        //aggiungo il click
+        newDiv.addEventListener('click', function(){
+            this.classList.toggle('clicked');
+            console.log("Hai cliccato la box numero: ", i );
+        })
+    }
+}
 
-//valore input 
-    userName = document.getElementById('userName');
-    userNameValue = userName.value;
-
-//controllare se il valore è Nan
-    if(isNaN(kmValue))
-
-*/
-
-/*
-Consegna:
-    L'utente clicca su un bottone che genererà una griglia di gioco quadrata.
-    Ogni cella ha un numero progressivo, da 1 a 100.
-    Ci saranno quindi 10 caselle per ognuna delle 10 righe.
-    Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro ed emetto un messaggio in console con il numero della cella cliccata
-
-    BONUS:
-    Ciao Diego, il bonus per oggi è dare al giocatore la possibilità di controllare il numero di celle che vengono generate. Tramite una select l'utente seleziona il livello di difficoltà e in base a quello vengono generate le celle:
-    con difficoltà 1 => 100 celle
-    difficoltà 2 => 81 celle
-    difficoltà 3 => 49 celle
-*/
+/* ------------CODE---------- */
 
 const boxContainer = document.querySelector('.box-container');
 console.log('boxContainer', boxContainer, typeof boxContainer);
@@ -54,51 +46,14 @@ restetButton.addEventListener('click', function(){
  })
 
 easy.addEventListener('click', function(){
-    boxContainer.innerHTML= "";
-    for(let i=1; i<=100; i++ ){
-        const newDiv = document.createElement('div');
-        newDiv.classList.add("box", "box-100");
-        newDiv.append(i);
-        boxContainer.append(newDiv);
-    
-        //aggiungo il click
-        newDiv.addEventListener('click', function(){
-            this.classList.toggle('clicked');
-            console.log("Hai cliccato la box numero: ", i );
-        })
-    }
+    playGameDifficulty (100);
 })
 
 medium.addEventListener('click', function(){
-    boxContainer.innerHTML= "";
-    for(let i=1; i<=81; i++ ){
-        const newDiv = document.createElement('div');
-        newDiv.classList.add("box" , "box-81");
-        newDiv.append(i);
-        boxContainer.append(newDiv);
-    
-        //aggiungo il click
-        newDiv.addEventListener('click', function(){
-            this.classList.toggle('clicked');
-            console.log("Hai cliccato la box numero: ", i );
-        })
-    }
+    playGameDifficulty (81);
 })
 
 hard.addEventListener('click', function(){
-    boxContainer.innerHTML= "";
-    for(let i=1; i<=49; i++ ){
-        const newDiv = document.createElement('div');
-        newDiv.classList.add("box", "box-49");
-        newDiv.append(i);
-        boxContainer.append(newDiv);
-    
-        //aggiungo il click
-        newDiv.addEventListener('click', function(){
-            this.classList.toggle('clicked');
-            console.log("Hai cliccato la box numero: ", i );
-
-        })
-    }
+    playGameDifficulty (49);
 })
 
