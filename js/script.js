@@ -17,22 +17,26 @@ function playGameDifficulty (x){
 }
 
 /* ------------CODE---------- */
-
+// elementi selezionati da html
 const boxContainer = document.querySelector('.box-container');
-console.log('boxContainer', boxContainer, typeof boxContainer);
-
 const playButton = document.getElementById("play_button");
-console.log('playButton', playButton, typeof playButton);
-
 const restetButton = document.getElementById("reset_button");
-console.log('restetButton', restetButton, typeof restetButton);
-
 const easy = document.getElementById("difficolta_1");
-console.log('easy', easy, typeof easy);
 const medium = document.getElementById("difficolta_2");
-console.log('medium', medium, typeof medium);
 const hard = document.getElementById("difficolta_3");
-console.log('hard', hard, typeof hard);
+
+
+//genero 16 numeri casuali
+const arrayBomb = []; // array vuoto
+//riempo array
+while (arrayBomb.length < 16){
+    let randomNumber = Math.floor(Math.random() * (100 - 1 + 1) ) + 1;
+    let isPresent = arrayBomb.includes(randomNumber);
+    if(!isPresent){
+        arrayBomb.push(randomNumber);
+    }
+}
+console.log('arrayBomb',arrayBomb, typeof arrayBomb); //stampo posizione bombe
 
 
 playButton.addEventListener('click', function(){
