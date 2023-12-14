@@ -1,6 +1,21 @@
 /*-------------FUNCTION-------------*/
 
 function playGameDifficulty (x){
+    const arrayBomb = []; // array vuoto
+    //riempo array
+    //genero 16 numeri casuali
+    while (arrayBomb.length < 16){
+        let randomNumber = Math.floor(Math.random() * (x - 1 + 1) ) + 1;
+        let isPresent = arrayBomb.includes(randomNumber);
+        if(!isPresent){
+            arrayBomb.push(randomNumber);
+        }
+    }
+    console.log('arrayBomb',arrayBomb, typeof arrayBomb); //stampo posizione bombe
+
+    let counter = 0;
+    console.log("Counter iniziale =  ", counter );
+
     boxContainer.innerHTML= "";
     for(let i=1; i<=x; i++ ){
         const newDiv = document.createElement('div');
@@ -9,10 +24,29 @@ function playGameDifficulty (x){
         boxContainer.append(newDiv);
     
         //aggiungo il click
-        newDiv.addEventListener('click', function(){
-            this.classList.toggle('clicked');
-            console.log("Hai cliccato la box numero: ", i );
-        })
+        //se i è inclusa nell'array allora aggingo la classe bomb altrimenti noBomb
+        if (arrayBomb.includes(i)){
+            newDiv.addEventListener('click', function(){
+                this.classList.add('Bomb');
+                alert("Hai perso, pollo, il tuo punteggio è di: " + counter + "\nPuoi iniziare una nuova partita");
+                boxContainer.innerHTML= "";
+            })
+        }
+        else{
+            newDiv.addEventListener('click', function(){
+                if (!this.classList.contains('noBomb')){
+                    counter++;
+                    console.log("Counter iniziale =  ", counter );
+                    if(counter == x - 16){
+                        alert("Hai vinto, il tuo punteggio è di:" + counter + "\nPuoi iniziare una nuova partita");
+                        boxContainer.innerHTML= "";
+                    }
+                }
+                this.classList.add('noBomb');
+                console.log("Hai cliccato la box numero: ", i );
+            })
+        }
+       
     }
 }
 
@@ -26,23 +60,9 @@ const medium = document.getElementById("difficolta_2");
 const hard = document.getElementById("difficolta_3");
 
 
-//genero 16 numeri casuali
-const arrayBomb = []; // array vuoto
-//riempo array
-while (arrayBomb.length < 16){
-    let randomNumber = Math.floor(Math.random() * (100 - 1 + 1) ) + 1;
-    let isPresent = arrayBomb.includes(randomNumber);
-    if(!isPresent){
-        arrayBomb.push(randomNumber);
-    }
-}
-console.log('arrayBomb',arrayBomb, typeof arrayBomb); //stampo posizione bombe
-
-
 playButton.addEventListener('click', function(){
    const level = document.querySelector('.level_container');
    level.classList.toggle("d-block");
-   console.log('level', level, typeof level);
 })
 
 restetButton.addEventListener('click', function(){
